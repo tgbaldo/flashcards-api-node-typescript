@@ -1,6 +1,8 @@
 import express, { NextFunction, Request, Response } from 'express';
 import router from './router';
 
+import './config/connection';
+
 const app = express();
 
 app.disable('etag');
@@ -24,7 +26,7 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 });
 
 (async () => {
-  app.listen(3000, () => {
+  app.listen(4000, () => {
     console.info('app started');
   });
 })();

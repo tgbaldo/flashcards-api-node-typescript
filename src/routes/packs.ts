@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 export const router = Router();
 
-router.get('/packs', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/', async (req: Request, res: Response, next: NextFunction) => {
     const packs = [
         {'name': 'Pack Name One'},
         {'name': 'Pack Name Two'},

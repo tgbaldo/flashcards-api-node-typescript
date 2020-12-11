@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "tsnd src/index.ts",
+    "start": "ts-node src/index.ts",
     "build": "tsc",
     "pretty": "prettier-eslint ./src/*/**/*.ts --write"
   },
@@ -11,11 +11,13 @@
   "author": "Tiago Baldo <tgbaldo@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/uuid": "^8.3.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mongoose": "^5.11.5",
     "tslib": "^2.0.3",
     "url-parse": "^1.4.7",
-    "uuid": "^8.3.1"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.8",
