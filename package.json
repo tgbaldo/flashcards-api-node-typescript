@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "tsnd src/index.ts",
     "build": "tsc",
     "pretty": "prettier-eslint ./src/*/**/*.ts --write"
   },
@@ -15,6 +15,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.11.5",
+    "ts-node-dev": "^1.1.1",
     "tslib": "^2.0.3",
     "url-parse": "^1.4.7",
     "uuid": "^8.3.2"

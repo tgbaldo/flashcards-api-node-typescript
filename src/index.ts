@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express';
 import router from './router';
 
-// import './config/connection';
+import './config/connection';
 
 const app = express();
 
