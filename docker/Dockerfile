@@ -7,7 +7,7 @@ WORKDIR /src
 COPY package.json /src/
 COPY yarn.lock /src/
 
-RUN yarn install
+RUN yarn
 
 ADD . /src
 
