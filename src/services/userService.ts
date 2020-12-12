@@ -11,6 +11,10 @@ class UserService {
     return userRepository.getById(userId);
   }
 
+  public async getUserByEmail(email: string,): Promise<IUserModel> {
+    return userRepository.getByEmail(email);
+  }
+
   public async create(user: ICreateUser): Promise<IUserModel> {
     return userRepository.create(user);
   }

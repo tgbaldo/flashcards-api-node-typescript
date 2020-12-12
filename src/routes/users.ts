@@ -5,7 +5,12 @@ export const router = Router();
 
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
     const users = await userService.getAll();
-    res.send(users);
+    return res.send(users);
+});
+
+router.get('/email/:email', async (req: Request, res: Response, next: NextFunction) => {
+  const user = await userService.getUserByEmail(req.params.email);
+  return res.send(user);
 });
 
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {
@@ -13,5 +18,5 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     name: req.body.name,
     email: req.body.email
   });
-  res.send(user);
+  return res.send(user);
 });

@@ -7,5 +7,5 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
         {'name': 'Pack Name Two'},
         {'name': 'Pack Name Three'},
     ];
-    res.send(packs);
+    return res.send(packs);
 });

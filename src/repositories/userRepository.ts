@@ -6,12 +6,12 @@ class UserRepository {
     return User.find({});
   }
 
-  public async getByEmail(email: string): Promise<IUserModel | undefined> {
-    return User.findOne({ email, deletedAt: { $exists: false } });
-  }
-
   public async getById(id: string): Promise<IUserModel | undefined> {
     return User.findOne({ _id: id, deletedAt: { $exists: false } });
+  }
+
+  public async getByEmail(email: string): Promise<IUserModel | undefined> {
+    return User.findOne({ email: email, deletedAt: { $exists: false } });
   }
 
   public async create(userData: ICreateUser): Promise<IUserModel> {
