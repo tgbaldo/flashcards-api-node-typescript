@@ -19,3 +19,9 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
   });
   return res.send(card);
 });
+
+router.post('/:cardId/fliping', async (req: Request, res: Response, next: NextFunction) => {
+  const card = await cardService.getById(req.params.cardId);
+  const fliping = await cardService.fliping(card);
+  return res.send(fliping);
+});

@@ -19,8 +19,13 @@ class CardRepository {
       packId: cardData.pack.id
     });
 
-    await card.save();
-    return card;
+    return await card.save();
+  }
+
+  public async fliping(card: ICardModel): Promise<ICardModel> {
+    return await card.update({
+      $push: { teste: 10 }
+    });
   }
 }
 

@@ -11,6 +11,14 @@ class CardService {
   public async create(card: ICreateCard): Promise<ICardModel> {
     return cardRepository.create(card);
   }
+
+  public async getById(cardId: string): Promise<ICardModel> {
+    return cardRepository.getById(cardId);
+  }
+
+  public async fliping(card: ICardModel): Promise<ICardModel> {
+    return cardRepository.fliping(card);
+  }
 }
 
 export const cardService = new CardService;
