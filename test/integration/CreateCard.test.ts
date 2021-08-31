@@ -1,5 +1,5 @@
 import { validate as validateUuid } from 'uuid';
-import Card from '../../src/domain/Card/Card';
+import CreateCard from '../../src/application/Card/CreateCard';
 import IdGeneratorByUuid from '../../src/infra/factory/IdGeneratorByUuid';
 import MemoryRepositoryFactory from '../../src/infra/factory/MemoryRepositoryFactory';
 
@@ -11,13 +11,12 @@ test('Should creates a card with valid id', async () => {
   };
 
   const idGenerator = new IdGeneratorByUuid();
-  const id = idGenerator.make();
-  const { deckId, front, back } = input;
-
   const repositoryFactory = new MemoryRepositoryFactory();
   const deckRepository = repositoryFactory.createDeckRepository();
-  const deck = await deckRepository.getById(deckId);
+  const cardRepository = repositoryFactory.createCardRepository();
 
-  const card = new Card(id, deck.getId(), front, back);
-  expect(validateUuid(card.getId())).toBe(true);
+  const createCard = new CreateCard(idGenerator, deckRepository, cardRepository);
+  const cardId = await createCard.execute({ ...input });
+
+  expect(validateUuid(cardId)).toBe(true);
 });
