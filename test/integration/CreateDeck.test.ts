@@ -3,7 +3,7 @@ import CreateDeck from '../../src/application/Deck/CreateDeck';
 import IdGeneratorByUuid from '../../src/infra/factory/IdGeneratorByUuid';
 import MemoryRepositoryFactory from '../../src/infra/factory/MemoryRepositoryFactory';
 
-test('Should creates a deck with valid id', async () => {
+test("Should creates a deck with valid id", async () => {
   const input = {
     name: 'Curso de PHP'
   };

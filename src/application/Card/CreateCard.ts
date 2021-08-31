@@ -17,7 +17,7 @@ export default class CreateCard {
   public async execute({ deckId, front, back }: { deckId: string, front: string, back: string }): Promise<string> {
     const id = this.idGenerator.make();
     const deck = await this.deckRepository.getById(deckId);
-    if (!deck) throw new Error('Deck not found!');
+    if (!deck) throw new Error('Invalid Deck!');
     const card = new Card(id, deck.getId(), front, back);
     await this.cardRepository.save(card);
 
