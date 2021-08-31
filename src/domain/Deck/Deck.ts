@@ -1,13 +1,13 @@
-import BaseEntity from "../Core/BaseEntity";
-
-export default class Deck extends BaseEntity {
+export default class Deck {
   id: string;
   name: string;
 
   constructor (id: string, name: string) {
-    super(id);
-
     this.id = id;
     this.name = name;
+  }
+
+  public getId(): string {
+    return this.id;
   }
 }
