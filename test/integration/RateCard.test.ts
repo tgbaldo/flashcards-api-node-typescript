@@ -24,3 +24,15 @@ test("Should not to rate a card with invalid card", async () => {
 
   expect(() => rateCard.execute(cardId, rateId)).rejects.toThrow(new Error('Invalid Card'));
 });
+
+test("Should not to rate a card with invalid rate", async () => {
+  const cardId = "10d06106-86d5-4bbe-9960-a9ea40fe630f";
+  const rateId = "6b0a502c";
+
+  const factoryRepository = new MemoryRepositoryFactory();
+  const cardRepository = factoryRepository.createCardRepository();
+  const rateRepository = factoryRepository.createRateRepository();
+  const rateCard = new RateCard(cardRepository, rateRepository);
+
+  expect(() => rateCard.execute(cardId, rateId)).rejects.toThrow(new Error('Invalid Rate'));
+});
