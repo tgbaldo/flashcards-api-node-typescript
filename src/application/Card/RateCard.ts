@@ -12,9 +12,9 @@ export default class RateCard {
 
   public async execute(cardId: string, rateId: string): Promise<void> {
     const card = await this.cardRepository.getById(cardId);
-    if (!card) throw new Error('Card not found');
+    if (!card) throw new Error('Invalid Card');
     const rate = await this.rateRepository.getById(rateId);
-    if (!rate) throw new Error('Rate not found');
+    if (!rate) throw new Error('Invalid Rate');
     await this.cardRepository.rate(card, rate);
   }
 }
