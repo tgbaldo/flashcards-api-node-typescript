@@ -15,6 +15,6 @@ export default class CreateDeck {
     const id = this.idGenerator.make();
     const deck = new Deck(id, name);
     await this.deckRepository.save(deck);
-    return deck.getId();
+    return deck.id;
   }
 }

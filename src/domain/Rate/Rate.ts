@@ -6,8 +6,4 @@ export default class Rate {
     this.id = id;
     this.name = name;
   }
-
-  public getId(): string {
-    return this.id;
-  }
 }

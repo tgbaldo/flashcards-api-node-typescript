@@ -6,8 +6,4 @@ export default class Deck {
     this.id = id;
     this.name = name;
   }
-
-  public getId(): string {
-    return this.id;
-  }
 }

@@ -9,5 +9,5 @@ test("Should returns a Deck by valid id", async () => {
   const getDeck = new GetDeck(deckRepository);
   const deck = await getDeck.execute(id);
 
-  expect(validateUuid(deck.getId())).toBe(true);
+  expect(validateUuid(deck.id)).toBe(true);
 });

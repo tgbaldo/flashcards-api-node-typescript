@@ -18,9 +18,9 @@ export default class CreateCard {
     const id = this.idGenerator.make();
     const deck = await this.deckRepository.getById(deckId);
     if (!deck) throw new Error('Invalid Deck!');
-    const card = new Card(id, deck.getId(), front, back);
+    const card = new Card(id, deck.id, front, back);
     await this.cardRepository.save(card);
 
-    return card.getId();
+    return card.id;
   }
 }

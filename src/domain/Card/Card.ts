@@ -8,8 +8,4 @@ export default class Card {
     this.front = front;
     this.back = back;
   }
-
-  public getId(): string {
-    return this.id;
-  }
 }
