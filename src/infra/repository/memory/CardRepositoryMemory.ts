@@ -1,8 +1,10 @@
 import Card from '../../../domain/Card/Card';
+import Rate from '../../../domain/Rate/Rate';
 import CardRepository from '../../../domain/Deck/CardRepository';
 
 export default class CardRepositoryMemory implements CardRepository {
     cards: Card[];
+    rates: (Rate & { created_at: Date })[];
 
     constructor () {
       this.cards = [
@@ -25,6 +27,16 @@ export default class CardRepositoryMemory implements CardRepository {
           "Qual é o seu nome?"
         ),
       ];
+
+      this.rates = [
+        Object.assign(new Rate("6b0a502c-748f-4265-aefb-feeb4fd39452", "Bom"), { created_at: new Date("2021-08-01") }),
+        Object.assign(new Rate('6b0a502c-748f-4265-aefb-feeb4fd39452', "Bom"), { created_at: new Date("2021-08-01") }),
+        Object.assign(new Rate('33005f6f-530b-42f6-b2f5-4a943df621f7', "Fácil"), { created_at: new Date("2021-08-02") }),
+        Object.assign(new Rate('6b0a502c-748f-4265-aefb-feeb4fd39452', "Bom"), { created_at: new Date("2021-08-03") }),
+        Object.assign(new Rate('57efcc36-2b96-4421-a3e8-98acda9e1bde', "Revisar"), { created_at: new Date("2021-08-04") }),
+        Object.assign(new Rate('1db1281c-ba75-4951-84ff-a8f8b707bdc4', "Difícil"), { created_at: new Date("2021-08-05") }),
+        Object.assign(new Rate('33005f6f-530b-42f6-b2f5-4a943df621f7', "Fácil"), { created_at: new Date("2021-08-06") })
+      ];
     }
 
     public async getById(id: string): Promise<Card | undefined> {
@@ -33,5 +45,9 @@ export default class CardRepositoryMemory implements CardRepository {
 
     public async save(deck: Card): Promise<void> {
       this.cards.push(deck);
+    }
+
+    public async rate(card: Card, rate: Rate): Promise<void> {
+      this.rates.push(Object.assign(rate, { created_at: new Date() }));
     }
 }
