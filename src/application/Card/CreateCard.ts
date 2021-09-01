@@ -1,5 +1,6 @@
 import Card from "../../domain/Card/Card";
 import IdGenerator from "../../domain/Core/IdGenerator";
+import RepositoryFactory from "../../domain/Core/RepositoryFactory";
 import CardRepository from "../../domain/Deck/CardRepository";
 import DeckRepository from "../../domain/Deck/DeckRepository";
 
@@ -8,10 +9,10 @@ export default class CreateCard {
   deckRepository: DeckRepository;
   cardRepository: CardRepository;
 
-  constructor (idGenerator: IdGenerator, deckRepository: DeckRepository, cardRepository: CardRepository) {
+  constructor (idGenerator: IdGenerator, repositoryFactory: RepositoryFactory) {
     this.idGenerator = idGenerator;
-    this.deckRepository = deckRepository;
-    this.cardRepository = cardRepository;
+    this.deckRepository = repositoryFactory.createDeckRepository();
+    this.cardRepository = repositoryFactory.createCardRepository();
   }
 
   public async execute({ deckId, front, back }: { deckId: string, front: string, back: string }): Promise<string> {

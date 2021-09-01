@@ -1,13 +1,14 @@
 import DeckRepository from "../../domain/Deck/DeckRepository";
 import IdGenerator from '../../domain/Core/IdGenerator';
 import Deck from "../../domain/Deck/Deck";
+import RepositoryFactory from "../../domain/Core/RepositoryFactory";
 
 export default class CreateDeck {
   deckRepository: DeckRepository;
   idGenerator: IdGenerator;
 
-  constructor (deckRepository: DeckRepository, idGenerator: IdGenerator) {
-    this.deckRepository = deckRepository;
+  constructor (idGenerator: IdGenerator, repositoryFactory: RepositoryFactory) {
+    this.deckRepository = repositoryFactory.createDeckRepository();
     this.idGenerator = idGenerator;
   }
 

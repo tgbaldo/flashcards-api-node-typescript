@@ -12,10 +12,8 @@ test("Should creates a card with valid id", async () => {
 
   const idGenerator = new IdGeneratorByUuid();
   const repositoryFactory = new MemoryRepositoryFactory();
-  const deckRepository = repositoryFactory.createDeckRepository();
-  const cardRepository = repositoryFactory.createCardRepository();
 
-  const createCard = new CreateCard(idGenerator, deckRepository, cardRepository);
+  const createCard = new CreateCard(idGenerator, repositoryFactory);
   const cardId = await createCard.execute({ ...input });
 
   expect(validateUuid(cardId)).toBe(true);
@@ -30,10 +28,8 @@ test("Should not creates a card with invalid deck", async () => {
 
   const idGenerator = new IdGeneratorByUuid();
   const repositoryFactory = new MemoryRepositoryFactory();
-  const deckRepository = repositoryFactory.createDeckRepository();
-  const cardRepository = repositoryFactory.createCardRepository();
 
-  const createCard = new CreateCard(idGenerator, deckRepository, cardRepository);
+  const createCard = new CreateCard(idGenerator, repositoryFactory);
 
   expect(() => createCard.execute({ ...input })).rejects.toThrow(new Error('Invalid Deck!'));
 });

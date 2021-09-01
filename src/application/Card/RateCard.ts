@@ -1,3 +1,4 @@
+import RepositoryFactory from "../../domain/Core/RepositoryFactory";
 import CardRepository from "../../domain/Deck/CardRepository";
 import RateRepository from "../../domain/Rate/RateRepository";
 
@@ -5,9 +6,9 @@ export default class RateCard {
   cardRepository: CardRepository;
   rateRepository: RateRepository;
 
-  constructor (cardRepository: CardRepository, rateRepository: RateRepository) {
-    this.cardRepository = cardRepository;
-    this.rateRepository = rateRepository;
+  constructor (repositoryFactory: RepositoryFactory) {
+    this.cardRepository = repositoryFactory.createCardRepository();
+    this.rateRepository = repositoryFactory.createRateRepository();
   }
 
   public async execute(cardId: string, rateId: string): Promise<void> {

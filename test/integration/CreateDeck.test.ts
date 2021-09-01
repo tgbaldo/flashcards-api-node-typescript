@@ -9,10 +9,9 @@ test("Should creates a deck with valid id", async () => {
   };
 
   const repositoryFactory = new MemoryRepositoryFactory();
-  const deckRepository = repositoryFactory.createDeckRepository();
   const idGenerator = new IdGeneratorByUuid();
 
-  const createDeck = new CreateDeck(deckRepository, idGenerator);
+  const createDeck = new CreateDeck(idGenerator, repositoryFactory);
   const deckId = await createDeck.execute({ ...input });
   expect(validatasUuid(deckId)).toBe(true);
 });

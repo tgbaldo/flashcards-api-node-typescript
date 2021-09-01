@@ -6,9 +6,7 @@ test("Should to rate a card", async () => {
   const rateId = "6b0a502c-748f-4265-aefb-feeb4fd39452";
 
   const factoryRepository = new MemoryRepositoryFactory();
-  const cardRepository = factoryRepository.createCardRepository();
-  const rateRepository = factoryRepository.createRateRepository();
-  const rateCard = new RateCard(cardRepository, rateRepository);
+  const rateCard = new RateCard(factoryRepository);
 
   expect(await rateCard.execute(cardId, rateId)).toBeUndefined();
 });
@@ -18,9 +16,7 @@ test("Should not to rate a card with invalid card", async () => {
   const rateId = "6b0a502c-748f-4265-aefb-feeb4fd39452";
 
   const factoryRepository = new MemoryRepositoryFactory();
-  const cardRepository = factoryRepository.createCardRepository();
-  const rateRepository = factoryRepository.createRateRepository();
-  const rateCard = new RateCard(cardRepository, rateRepository);
+  const rateCard = new RateCard(factoryRepository);
 
   expect(() => rateCard.execute(cardId, rateId)).rejects.toThrow(new Error('Invalid Card'));
 });
@@ -30,9 +26,7 @@ test("Should not to rate a card with invalid rate", async () => {
   const rateId = "6b0a502c";
 
   const factoryRepository = new MemoryRepositoryFactory();
-  const cardRepository = factoryRepository.createCardRepository();
-  const rateRepository = factoryRepository.createRateRepository();
-  const rateCard = new RateCard(cardRepository, rateRepository);
+  const rateCard = new RateCard(factoryRepository);
 
   expect(() => rateCard.execute(cardId, rateId)).rejects.toThrow(new Error('Invalid Rate'));
 });
