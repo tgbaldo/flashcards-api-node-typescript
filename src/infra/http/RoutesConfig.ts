@@ -4,6 +4,7 @@ import CreateDeck from '../../application/Deck/CreateDeck';
 import GetDeck from '../../application/Deck/GetDeck';
 import RepositoryFactory from "../../domain/Core/RepositoryFactory";
 import IdGenerator from '../../domain/Core/IdGenerator';
+import CreateCard from '../../application/Card/CreateCard';
 
 const router = Router();
 
@@ -31,6 +32,16 @@ export default class RoutesConfig {
         try {
           const createDeck = new CreateDeck(this.idGenerator, this.repositoryFactory);
           const deck = await createDeck.execute(request.body.name);
+          return response.json(deck);
+        } catch (error) {
+          next(error);
+        }
+      });
+
+      router.post('/cards', async (request: Request, response: Response, next: NextFunction) => {
+        try {
+          const createCard = new CreateCard(this.idGenerator, this.repositoryFactory);
+          const deck = await createCard.execute({ ...request.body });
           return response.json(deck);
         } catch (error) {
           next(error);

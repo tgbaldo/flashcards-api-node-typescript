@@ -3,6 +3,8 @@ import IdGenerator from "../../domain/Core/IdGenerator";
 import RepositoryFactory from "../../domain/Core/RepositoryFactory";
 import CardRepository from "../../domain/Deck/CardRepository";
 import DeckRepository from "../../domain/Deck/DeckRepository";
+import CreateCardInput from './CreateCardInput';
+import CreateCardOutput from "./CreateCardOutput";
 
 export default class CreateCard {
   idGenerator: IdGenerator;
@@ -15,13 +17,13 @@ export default class CreateCard {
     this.cardRepository = repositoryFactory.createCardRepository();
   }
 
-  public async execute({ deckId, front, back }: { deckId: string, front: string, back: string }): Promise<string> {
+  public async execute(input: CreateCardInput): Promise<CreateCardOutput> {
     const id = this.idGenerator.make();
-    const deck = await this.deckRepository.getById(deckId);
+    const deck = await this.deckRepository.getById(input.deckId);
     if (!deck) throw new Error('Invalid Deck!');
-    const card = new Card(id, deck.id, front, back);
+    const card = new Card(id, deck.id, input.front, input.back);
     await this.cardRepository.save(card);
 
-    return card.id;
+    return new CreateCardOutput({ id });
   }
 }
