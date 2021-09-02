@@ -20,4 +20,13 @@ export default class DeckRepositoryMemory implements DeckRepository {
     public async save(deck: Deck): Promise<void> {
       this.decks.push(deck);
     }
+
+    public async getAll(): Promise<Deck[]> {
+      const decks = this.decks;
+      if (!decks) {
+        return [];
+      }
+
+      return decks;
+    }
 }

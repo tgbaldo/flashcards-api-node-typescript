@@ -5,6 +5,8 @@ import GetDeck from '../../application/Deck/GetDeck';
 import RepositoryFactory from "../../domain/Core/RepositoryFactory";
 import IdGenerator from '../../domain/Core/IdGenerator';
 import CreateCard from '../../application/Card/CreateCard';
+import RateCard from '../../application/Card/RateCard';
+import RateCardInput from '../../application/Card/RateCardInput';
 
 const router = Router();
 
@@ -32,7 +34,15 @@ export default class RoutesConfig {
         try {
           const createDeck = new CreateDeck(this.idGenerator, this.repositoryFactory);
           const deck = await createDeck.execute(request.body.name);
-          return response.json(deck);
+          return response.status(201).json(deck);
+        } catch (error) {
+          next(error);
+        }
+      });
+
+      router.get('/decks', async (request: Request, response: Response, next: NextFunction) => {
+        try {
+          return response.status(200).json([]);
         } catch (error) {
           next(error);
         }
@@ -42,7 +52,22 @@ export default class RoutesConfig {
         try {
           const createCard = new CreateCard(this.idGenerator, this.repositoryFactory);
           const deck = await createCard.execute({ ...request.body });
-          return response.json(deck);
+          return response.status(201).json(deck);
+        } catch (error) {
+          next(error);
+        }
+      });
+
+      router.post('/cards/:id/rate', async (request: Request, response: Response, next: NextFunction) => {
+        try {
+          const rateCard = new RateCard(this.repositoryFactory);
+          const cardId = request.params.id;
+          const input = {
+            cardId,
+            ...request.body
+          } as RateCardInput;
+          const rate = await rateCard.execute(input);
+          return response.status(201).json(rate);
         } catch (error) {
           next(error);
         }

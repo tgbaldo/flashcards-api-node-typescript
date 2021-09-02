@@ -1,0 +1,11 @@
+import GetAllDeck from '../../src/application/Deck/GetAllDeck';
+import GetDeckOutput from '../../src/application/Deck/GetDeckOutput';
+import MemoryRepositoryFactory from '../../src/infra/factory/MemoryRepositoryFactory';
+
+test("Should returns all Deck", async () => {
+  const repositoryFactory = new MemoryRepositoryFactory;
+  const getAllDeck = new GetAllDeck(repositoryFactory);
+  const decks = await getAllDeck.execute();
+
+  expect(decks).toBeInstanceOf(Array));
+});
