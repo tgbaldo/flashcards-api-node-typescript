@@ -12,10 +12,12 @@ export default class CreateDeck {
     this.idGenerator = idGenerator;
   }
 
-  public async execute({ name }: { name: string }): Promise<string> {
+  public async execute({ name }: { name: string }): Promise<{id: string}> {
     const id = this.idGenerator.make();
     const deck = new Deck(id, name);
     await this.deckRepository.save(deck);
-    return deck.id;
+    return {
+      id: deck.id
+    };
   }
 }

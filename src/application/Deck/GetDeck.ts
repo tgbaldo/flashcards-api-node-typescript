@@ -9,7 +9,9 @@ export default class GetDeck {
     this.deckRepository = repositoryFactory.createDeckRepository();
   }
 
-  public async execute(id: string): Promise<Deck | undefined> {
-    return this.deckRepository.getById(id);
+  public async execute(id: string): Promise<Deck> {
+    const deck = await this.deckRepository.getById(id);
+    if (!deck) throw new Error('Card not found');
+    return deck;
   }
 }

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "tsnd src/index.ts",
+    "start": "tsnd src/main.ts",
     "build": "tsc",
     "pretty": "prettier-eslint ./src/*/**/*.ts --write",
     "test": "tsc && jest ./dist --forceExit"
