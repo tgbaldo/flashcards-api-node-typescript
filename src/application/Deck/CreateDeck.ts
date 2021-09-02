@@ -2,6 +2,8 @@ import DeckRepository from "../../domain/Deck/DeckRepository";
 import IdGenerator from '../../domain/Core/IdGenerator';
 import Deck from "../../domain/Deck/Deck";
 import RepositoryFactory from "../../domain/Core/RepositoryFactory";
+import CreateDeckOutput from './CreateDeckOutput';
+import CreateDeckInput from './CreateDeckInput';
 
 export default class CreateDeck {
   deckRepository: DeckRepository;
@@ -12,12 +14,10 @@ export default class CreateDeck {
     this.idGenerator = idGenerator;
   }
 
-  public async execute({ name }: { name: string }): Promise<{id: string}> {
+  public async execute(input: CreateDeckInput): Promise<CreateDeckOutput> {
     const id = this.idGenerator.make();
-    const deck = new Deck(id, name);
+    const deck = new Deck(id, input.name);
     await this.deckRepository.save(deck);
-    return {
-      id: deck.id
-    };
+    return new CreateDeckOutput({ id, ...input });
   }
 }
