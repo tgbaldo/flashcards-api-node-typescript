@@ -2,12 +2,15 @@ import express, { NextFunction, Request, Response } from 'express';
 import RoutesConfig from './infra/http/RoutesConfig';
 import MemoryRepositoryFactory from './infra/factory/MemoryRepositoryFactory';
 import IdGeneratorByUuid from './infra/factory/IdGeneratorByUuid';
+import cors from 'cors';
 
 const app = express();
 
 app.disable('etag');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cors());
 
 const repositoryFactoryMemory = new MemoryRepositoryFactory();
 app.use('/v1', new RoutesConfig(new IdGeneratorByUuid, repositoryFactoryMemory).getRouter());
@@ -32,7 +35,7 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 });
 
 (async () => {
-  app.listen(4000, () => {
+  app.listen(3001, () => {
     console.info(`app started`);
   });
 })();

@@ -7,6 +7,7 @@ import IdGenerator from '../../domain/Core/IdGenerator';
 import CreateCard from '../../application/Card/CreateCard';
 import RateCard from '../../application/Card/RateCard';
 import RateCardInput from '../../application/Card/RateCardInput';
+import Joi from 'joi';
 
 const router = Router();
 
@@ -32,6 +33,9 @@ export default class RoutesConfig {
 
       router.post('/decks', async (request: Request, response: Response, next: NextFunction) => {
         try {
+          const schema = Joi.object({ name: Joi.string().max(255).required() });
+          await schema.validateAsync({ ...request.body });
+
           const createDeck = new CreateDeck(this.idGenerator, this.repositoryFactory);
           const deck = await createDeck.execute(request.body.name);
           return response.status(201).json(deck);
@@ -50,6 +54,14 @@ export default class RoutesConfig {
 
       router.post('/cards', async (request: Request, response: Response, next: NextFunction) => {
         try {
+          const schema = Joi.object({
+            deckId: Joi.string().required(),
+            front: Joi.string().required(),
+            back: Joi.string().required(),
+          });
+          const { deckId, front, back } = request.body;
+          await schema.validateAsync({ deckId, front, back });
+
           const createCard = new CreateCard(this.idGenerator, this.repositoryFactory);
           const deck = await createCard.execute({ ...request.body });
           return response.status(201).json(deck);

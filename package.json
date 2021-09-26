@@ -12,17 +12,20 @@
   "author": "Tiago Baldo <tgbaldo@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/joi": "^17.2.3",
     "@types/uuid": "^8.3.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jest": "^27.1.0",
+    "joi": "^17.4.2",
     "ts-node-dev": "^1.1.1",
     "tslib": "^2.0.3",
     "url-parse": "^1.4.7",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.8",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
     "@types/jest": "^27.0.1",
     "ts-node": "^9.1.0",
     "typescript": "^4.1.2"
