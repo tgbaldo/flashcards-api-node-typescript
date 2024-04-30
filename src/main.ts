@@ -3,7 +3,7 @@ import RoutesConfig from './infra/http/RoutesConfig';
 import MemoryRepositoryFactory from './infra/factory/MemoryRepositoryFactory';
 import IdGeneratorByCuid from './infra/factory/IdGeneratorByCuid';
 import cors from 'cors';
-import IdGeneratorService from './service/IdGeneratorService';
+import IdGeneratorService from './shared/domain/service/IdGeneratorService';
 
 const app = express();
 

@@ -3,7 +3,7 @@ import CreateCard from '../../src/application/Card/CreateCard';
 import IdGeneratorByCuid from '../../src/infra/factory/IdGeneratorByCuid';
 import MemoryRepositoryFactory from '../../src/infra/factory/MemoryRepositoryFactory';
 import CreateCardInput from '../../src/application/Card/CreateCardInput';
-import IdGeneratorService from '../../src/service/IdGeneratorService';
+import IdGeneratorService from '../../src/shared/domain/service/IdGeneratorService';
 
 test("Should creates a card with valid id", async () => {
   const input = {

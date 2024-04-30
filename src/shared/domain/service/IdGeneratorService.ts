@@ -1,4 +1,4 @@
-import IdGenerator from "../shared/domain/contracts/IdGenerator";
+import IdGenerator from "../contracts/IdGenerator";
 
 export default class IdGeneratorService {
   constructor (private readonly idGenerator: IdGenerator) {}

@@ -3,7 +3,7 @@ import Deck from "../../domain/Deck/Deck";
 import RepositoryFactory from "../../shared/RepositoryFactory";
 import CreateDeckOutput from './CreateDeckOutput';
 import CreateDeckInput from './CreateDeckInput';
-import IdGeneratorService from "../../service/IdGeneratorService";
+import IdGeneratorService from "../../shared/domain/service/IdGeneratorService";
 
 export default class CreateDeck {
   private readonly deckRepository: DeckRepository;

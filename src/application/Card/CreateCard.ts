@@ -4,7 +4,7 @@ import CardRepository from "../../domain/Deck/CardRepository";
 import DeckRepository from "../../domain/Deck/DeckRepository";
 import CreateCardInput from './CreateCardInput';
 import CreateCardOutput from "./CreateCardOutput";
-import IdGeneratorService from "../../service/IdGeneratorService";
+import IdGeneratorService from "../../shared/domain/service/IdGeneratorService";
 
 export default class CreateCard {
   private readonly deckRepository: DeckRepository;

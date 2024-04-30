@@ -7,7 +7,7 @@ import CreateCard from '../../application/Card/CreateCard';
 import RateCard from '../../application/Card/RateCard';
 import RateCardInput from '../../application/Card/RateCardInput';
 import Joi from 'joi';
-import IdGeneratorService from '../../service/IdGeneratorService';
+import IdGeneratorService from '../../shared/domain/service/IdGeneratorService';
 
 const router = Router();
 
