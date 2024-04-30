@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "dev": "yarn ts-node-dev --respawn --no-notify --poll --no-deps --ignore-watch node_modules --transpile-only --project tsconfig.dev.json src/main.ts --trace-warnings",
     "start": "tsnd src/main.ts",
     "build": "tsc",
     "pretty": "prettier-eslint ./src/*/**/*.ts --write",

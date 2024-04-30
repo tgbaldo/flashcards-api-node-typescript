@@ -19,6 +19,14 @@ export default class RoutesConfig {
   }
 
   public getRouter(): Router {
+    router.get('/', async (request: Request, response: Response, next: NextFunction) => {
+      try {
+        return response.json({ name: 'FlashCardsAPI', version: '1.0', status: 'online' });
+      } catch (error) {
+        next(error);
+      }
+    });
+
       router.get('/decks/:id', async (request: Request, response: Response, next: NextFunction) => {
         try {
           const getDeck = new GetDeck(this.repositoryFactory);

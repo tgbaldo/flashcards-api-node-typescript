@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 
+app.use((req, res, _) => { res.status(404).send('404: Page not found') });
 const repositoryFactoryMemory = new MemoryRepositoryFactory();
 app.use('/v1', new RoutesConfig(new IdGeneratorService(new IdGeneratorByCuid()), repositoryFactoryMemory).getRouter());
 
@@ -37,6 +38,6 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 
 (async () => {
   app.listen(3001, () => {
-    console.info(`app started`);
+    console.info(`app started on port 3001`);
   });
 })();
