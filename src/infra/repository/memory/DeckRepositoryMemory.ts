@@ -6,10 +6,9 @@ export default class DeckRepositoryMemory implements DeckRepository {
 
     constructor () {
       this.decks = [
-        new Deck('947ea4f4-5353-4ed5-883a-f74c885f224c', 'Inglês'),
-        new Deck('a058db29-feb2-40a9-a45e-39919a21fa58', 'CSGO'),
-        new Deck('55fd8f50-f0a1-49f6-8099-1e1efb6749f9', 'Espanhol'),
-        new Deck('a2b068a0-9515-4617-9831-d2f9a015023e', 'Bíblia'),
+        new Deck('gzyfsffuu7z1y0pvlq27iqpd', 'Inglês'),
+        new Deck('wjfazn7qnd', 'CSGO'),
+        new Deck('itp2u4ozr4', 'Espanhol'),
       ];
     }
 

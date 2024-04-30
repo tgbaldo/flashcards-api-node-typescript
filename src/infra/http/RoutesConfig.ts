@@ -2,22 +2,20 @@ import { Router, Request, NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
 import CreateDeck from '../../application/Deck/CreateDeck';
 import GetDeck from '../../application/Deck/GetDeck';
-import RepositoryFactory from "../../domain/Core/RepositoryFactory";
-import IdGenerator from '../../domain/Core/IdGenerator';
+import RepositoryFactory from "../../shared/RepositoryFactory";
 import CreateCard from '../../application/Card/CreateCard';
 import RateCard from '../../application/Card/RateCard';
 import RateCardInput from '../../application/Card/RateCardInput';
 import Joi from 'joi';
+import IdGeneratorService from '../../service/IdGeneratorService';
 
 const router = Router();
 
 export default class RoutesConfig {
-  repositoryFactory: any;
-  idGenerator: IdGenerator;
-
-  constructor(idGenerator: IdGenerator, repositoryFactory: RepositoryFactory) {
-    this.idGenerator = idGenerator;
-    this.repositoryFactory = repositoryFactory;
+  constructor(
+    private readonly idGeneratorService: IdGeneratorService,
+    private readonly repositoryFactory: RepositoryFactory
+  ) {
   }
 
   public getRouter(): Router {
@@ -36,7 +34,7 @@ export default class RoutesConfig {
           const schema = Joi.object({ name: Joi.string().max(255).required() });
           await schema.validateAsync({ ...request.body });
 
-          const createDeck = new CreateDeck(this.idGenerator, this.repositoryFactory);
+          const createDeck = new CreateDeck(this.idGeneratorService, this.repositoryFactory);
           const deck = await createDeck.execute(request.body.name);
           return response.status(201).json(deck);
         } catch (error) {
@@ -62,7 +60,7 @@ export default class RoutesConfig {
           const { deckId, front, back } = request.body;
           await schema.validateAsync({ deckId, front, back });
 
-          const createCard = new CreateCard(this.idGenerator, this.repositoryFactory);
+          const createCard = new CreateCard(this.idGeneratorService, this.repositoryFactory);
           const deck = await createCard.execute({ ...request.body });
           return response.status(201).json(deck);
         } catch (error) {

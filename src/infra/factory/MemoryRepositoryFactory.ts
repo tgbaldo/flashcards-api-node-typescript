@@ -1,4 +1,4 @@
-import RepositoryFactory from "../../domain/Core/RepositoryFactory";
+import RepositoryFactory from "../../shared/RepositoryFactory";
 import CardRepository from "../../domain/Deck/CardRepository";
 import DeckRepository from "../../domain/Deck/DeckRepository";
 import CardRepositoryMemory from "../repository/memory/CardRepositoryMemory";

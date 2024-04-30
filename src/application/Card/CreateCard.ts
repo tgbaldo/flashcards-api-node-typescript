@@ -1,24 +1,25 @@
 import Card from "../../domain/Card/Card";
-import IdGenerator from "../../domain/Core/IdGenerator";
-import RepositoryFactory from "../../domain/Core/RepositoryFactory";
+import RepositoryFactory from "../../shared/RepositoryFactory";
 import CardRepository from "../../domain/Deck/CardRepository";
 import DeckRepository from "../../domain/Deck/DeckRepository";
 import CreateCardInput from './CreateCardInput';
 import CreateCardOutput from "./CreateCardOutput";
+import IdGeneratorService from "../../service/IdGeneratorService";
 
 export default class CreateCard {
-  idGenerator: IdGenerator;
-  deckRepository: DeckRepository;
-  cardRepository: CardRepository;
+  private readonly deckRepository: DeckRepository;
+  private readonly cardRepository: CardRepository;
 
-  constructor (idGenerator: IdGenerator, repositoryFactory: RepositoryFactory) {
-    this.idGenerator = idGenerator;
-    this.deckRepository = repositoryFactory.createDeckRepository();
-    this.cardRepository = repositoryFactory.createCardRepository();
+  constructor (
+    private readonly idGeneratorService: IdGeneratorService,
+    private readonly repositoryFactory: RepositoryFactory
+  ) {
+    this.deckRepository = this.repositoryFactory.createDeckRepository();
+    this.cardRepository = this.repositoryFactory.createCardRepository();
   }
 
   public async execute(input: CreateCardInput): Promise<CreateCardOutput> {
-    const id = this.idGenerator.make();
+    const id = this.idGeneratorService.id();
     const deck = await this.deckRepository.getById(input.deckId);
     if (!deck) throw new Error('Invalid Deck!');
     const card = new Card(id, deck.id, input.front, input.back);

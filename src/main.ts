@@ -1,8 +1,9 @@
 import express, { NextFunction, Request, Response } from 'express';
 import RoutesConfig from './infra/http/RoutesConfig';
 import MemoryRepositoryFactory from './infra/factory/MemoryRepositoryFactory';
-import IdGeneratorByUuid from './infra/factory/IdGeneratorByUuid';
+import IdGeneratorByCuid from './infra/factory/IdGeneratorByCuid';
 import cors from 'cors';
+import IdGeneratorService from './service/IdGeneratorService';
 
 const app = express();
 
@@ -13,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 const repositoryFactoryMemory = new MemoryRepositoryFactory();
-app.use('/v1', new RoutesConfig(new IdGeneratorByUuid, repositoryFactoryMemory).getRouter());
+app.use('/v1', new RoutesConfig(new IdGeneratorService(new IdGeneratorByCuid()), repositoryFactoryMemory).getRouter());
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   if (error.toJSON) {

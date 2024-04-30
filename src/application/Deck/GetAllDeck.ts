@@ -1,4 +1,4 @@
-import RepositoryFactory from '../../domain/Core/RepositoryFactory';
+import RepositoryFactory from '../../shared/RepositoryFactory';
 import Deck from '../../domain/Deck/Deck';
 import DeckRepository from '../../domain/Deck/DeckRepository';
 import GetDeckOutput from './GetDeckOutput';

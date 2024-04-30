@@ -1,21 +1,22 @@
 import DeckRepository from "../../domain/Deck/DeckRepository";
-import IdGenerator from '../../domain/Core/IdGenerator';
 import Deck from "../../domain/Deck/Deck";
-import RepositoryFactory from "../../domain/Core/RepositoryFactory";
+import RepositoryFactory from "../../shared/RepositoryFactory";
 import CreateDeckOutput from './CreateDeckOutput';
 import CreateDeckInput from './CreateDeckInput';
+import IdGeneratorService from "../../service/IdGeneratorService";
 
 export default class CreateDeck {
-  deckRepository: DeckRepository;
-  idGenerator: IdGenerator;
+  private readonly deckRepository: DeckRepository;
 
-  constructor (idGenerator: IdGenerator, repositoryFactory: RepositoryFactory) {
-    this.deckRepository = repositoryFactory.createDeckRepository();
-    this.idGenerator = idGenerator;
+  constructor (
+    private readonly idGeneratorService: IdGeneratorService,
+    private readonly repositoryFactory: RepositoryFactory
+  ) {
+    this.deckRepository = this.repositoryFactory.createDeckRepository();
   }
 
   public async execute(input: CreateDeckInput): Promise<CreateDeckOutput> {
-    const id = this.idGenerator.make();
+    const id = this.idGeneratorService.id();
     const deck = new Deck(id, input.name);
     await this.deckRepository.save(deck);
     return new CreateDeckOutput({ id, ...input });

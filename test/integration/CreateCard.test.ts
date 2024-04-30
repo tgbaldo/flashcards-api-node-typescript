@@ -1,23 +1,24 @@
-import { validate as validateUuid } from 'uuid';
+import { isCuid } from '@paralleldrive/cuid2';
 import CreateCard from '../../src/application/Card/CreateCard';
-import IdGeneratorByUuid from '../../src/infra/factory/IdGeneratorByUuid';
+import IdGeneratorByCuid from '../../src/infra/factory/IdGeneratorByCuid';
 import MemoryRepositoryFactory from '../../src/infra/factory/MemoryRepositoryFactory';
 import CreateCardInput from '../../src/application/Card/CreateCardInput';
+import IdGeneratorService from '../../src/service/IdGeneratorService';
 
 test("Should creates a card with valid id", async () => {
   const input = {
-    deckId: "a058db29-feb2-40a9-a45e-39919a21fa58",
+    deckId: "gzyfsffuu7z1y0pvlq27iqpd",
     front: "Quem descobriu o Brasil?",
     back: "Pedro Álvares Cabral"
   } as CreateCardInput;
 
-  const idGenerator = new IdGeneratorByUuid();
+  const idGeneratorService = new IdGeneratorService(new IdGeneratorByCuid());
   const repositoryFactory = new MemoryRepositoryFactory();
 
-  const createCard = new CreateCard(idGenerator, repositoryFactory);
+  const createCard = new CreateCard(idGeneratorService, repositoryFactory);
   const card = await createCard.execute({ ...input });
 
-  expect(validateUuid(card.id)).toBe(true);
+  expect(isCuid(card.id)).toBe(true);
 });
 
 test("Should not creates a card with invalid deck", async () => {
@@ -27,10 +28,10 @@ test("Should not creates a card with invalid deck", async () => {
     back: "Pedro Álvares Cabral"
   } as CreateCardInput;
 
-  const idGenerator = new IdGeneratorByUuid();
+  const idGeneratorService = new IdGeneratorService(new IdGeneratorByCuid());
   const repositoryFactory = new MemoryRepositoryFactory();
 
-  const createCard = new CreateCard(idGenerator, repositoryFactory);
+  const createCard = new CreateCard(idGeneratorService, repositoryFactory);
 
   expect(() => createCard.execute({ ...input })).rejects.toThrow(new Error('Invalid Deck!'));
 });

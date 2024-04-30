@@ -12,6 +12,7 @@
   "author": "Tiago Baldo <tgbaldo@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@paralleldrive/cuid2": "^2.2.2",
     "@types/joi": "^17.2.3",
     "@types/uuid": "^8.3.0",
     "cors": "^2.8.5",
