@@ -39,15 +39,15 @@ export default class CardRepositoryMemory implements CardRepository {
       ];
     }
 
-    public async getById(id: string): Promise<Card | undefined> {
+    async getById(id: string): Promise<Card | undefined> {
       return this.cards.find(d => d.id === id);
     }
 
-    public async save(deck: Card): Promise<void> {
+    async save(deck: Card): Promise<void> {
       this.cards.push(deck);
     }
 
-    public async rate(card: Card, rate: Rate): Promise<void> {
+    async rate(card: Card, rate: Rate): Promise<void> {
       this.rates.push(Object.assign(rate, { created_at: new Date() }));
     }
 }

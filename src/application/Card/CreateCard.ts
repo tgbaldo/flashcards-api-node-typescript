@@ -18,7 +18,7 @@ export default class CreateCard {
     this.cardRepository = this.repositoryFactory.createCardRepository();
   }
 
-  public async execute(input: CreateCardInput): Promise<CreateCardOutput> {
+  async execute(input: CreateCardInput): Promise<CreateCardOutput> {
     const id = this.idGeneratorService.id();
     const deck = await this.deckRepository.getById(input.deckId);
     if (!deck) throw new Error('Invalid Deck!');

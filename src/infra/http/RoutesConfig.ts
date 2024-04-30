@@ -18,7 +18,7 @@ export default class RoutesConfig {
   ) {
   }
 
-  public getRouter(): Router {
+  getRouter(): Router {
     router.get('/', async (request: Request, response: Response, next: NextFunction) => {
       try {
         return response.json({ name: 'FlashCardsAPI', version: '1.0', status: 'online' });

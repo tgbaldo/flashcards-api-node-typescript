@@ -12,7 +12,7 @@ export default class RateCard {
     this.rateRepository = repositoryFactory.createRateRepository();
   }
 
-  public async execute(input: RateCardInput): Promise<void> {
+  async execute(input: RateCardInput): Promise<void> {
     const card = await this.cardRepository.getById(input.cardId);
     if (!card) throw new Error('Invalid Card');
     const rate = await this.rateRepository.getById(input.rateId);

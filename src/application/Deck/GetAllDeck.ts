@@ -10,7 +10,7 @@ export default class GetAllDeck {
     this.deckRepository = repositoryFactory.createDeckRepository();
   }
 
-  public async execute(): Promise<GetDeckOutput[] | []> {
+  async execute(): Promise<GetDeckOutput[] | []> {
     const decks = await this.deckRepository.getAll();
     if (!decks) {
       return [];

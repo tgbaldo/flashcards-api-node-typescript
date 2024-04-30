@@ -15,7 +15,7 @@ export default class CreateDeck {
     this.deckRepository = this.repositoryFactory.createDeckRepository();
   }
 
-  public async execute(input: CreateDeckInput): Promise<CreateDeckOutput> {
+  async execute(input: CreateDeckInput): Promise<CreateDeckOutput> {
     const id = this.idGeneratorService.id();
     const deck = new Deck(id, input.name);
     await this.deckRepository.save(deck);

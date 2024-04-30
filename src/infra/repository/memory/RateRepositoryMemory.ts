@@ -13,11 +13,11 @@ export default class RateRepositoryMemory implements RateRepository {
       ];
     }
 
-    public async getById(id: string): Promise<Rate | undefined> {
+    async getById(id: string): Promise<Rate | undefined> {
       return this.rates.find(d => d.id === id);
     }
 
-    public async save(rate: Rate): Promise<void> {
+    async save(rate: Rate): Promise<void> {
       this.rates.push(rate);
     }
 }
